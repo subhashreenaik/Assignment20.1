@@ -1,0 +1,11 @@
+sqoop export --connect jdbc:mysql://localhost/db1 --username 'root' -P --table 'company' --export-dir '/sqoopout' --input-fields-terminated-by ',' -m 1 --columns id,name,location
+IF NOT EXISTS (SELECT * FROM db1.company WHERE ID = 1)
+
+    INSERT INTO db1.company(id,name,location)
+    VALUES(1,'ram','delhi')
+
+ELSE
+
+    UPDATE db1.company
+    SET  name = syam, location=gujurat
+    WHERE ID = 2
